@@ -20,7 +20,7 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'Home', back
         body {
           background: linear-gradient(#000, #000);
           background-repeat: no-repeat;
-          background-size: cover;
+          background-size: 100% 100%;
           background-attachment: fixed;
           ${backgroundImage ? 'background-image: url(' + backgroundImage + ');' : ''}
           color: #fff;

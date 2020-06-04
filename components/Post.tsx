@@ -10,14 +10,14 @@ type Props = {
 const Post: React.FunctionComponent<Props> = ({ post }) => (
   <>
     <a href={post.url} target="_blank">
-      <div className="xs:w-4/5 sm:w-3/4 mx-auto bg-teal-100 my-4 text-teal-900 rounded overflow-hidden shadow-base">
+      <div className="xs:w-4/5 sm:w-3/4 mx-auto bg-green-100 my-4 text-gray-900 rounded overflow-hidden shadow-base">
         {post.coverImage ? (
           <img className="w-full" src={post.coverImage} alt={post.title}></img>
         ) : (
           ''
         )}
         <div className="px-6 pt-4 pb-1">
-          <div className="font-bold text-xl mb-1">{post.title}</div>
+          <div className="font-bold text-2xl mb-1">{post.title}</div>
         </div>
         <div className="px-8 py-1 w-40 flex justify-around text-center">
           <div className="w-4 inline">
@@ -37,7 +37,7 @@ const Post: React.FunctionComponent<Props> = ({ post }) => (
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="inline-block bg-indigo-500 rounded-full px-3 py-1 text-sm font-semibold text-gray-100 my-1 mr-2"
+              className="inline-block bg-purple-800 rounded-full px-3 py-1 text-sm font-semibold text-gray-100 my-1 mr-2"
             >
               #{tag}
             </span>
