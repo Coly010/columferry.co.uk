@@ -54,22 +54,22 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'Home', back
           </div>
           <div className={menuClasses}>
             <div className="text-sm lg:flex-grow">
-              <Link href="#responsive-header">
-                <a className="block mt-4 lg:inline-block lg:mt-0 text-green-100 hover:text-white mr-4">
+              <Link href="">
+                <a className="block underline mt-4 lg:inline-block lg:mt-0 text-green-100 hover:text-white mr-4">
                   Home
                 </a>
               </Link>
               <a
                 href="https://github.com/Coly010"
                 target="_blank"
-                className="block mt-4 lg:inline-block lg:mt-0 text-green-100 hover:text-white mr-4"
+                className="block hover:underline mt-4 lg:inline-block lg:mt-0 text-green-100 hover:text-white mr-4"
               >
                 GitHub
               </a>
               <a
                 href="https://twitter.com/FerryColum"
                 target="_blank"
-                className="block mt-4 lg:inline-block lg:mt-0 text-green-100 hover:text-white mr-4"
+                className="block hover:underline mt-4 lg:inline-block lg:mt-0 text-green-100 hover:text-white mr-4"
               >
                 Twitter
               </a>
