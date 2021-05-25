@@ -6,7 +6,15 @@ import { BlogPost } from '../interfaces/blog-post';
 import { isAfter } from 'date-fns';
 import Unsplash, { toJson } from 'unsplash-js';
 
-const IndexPage = ({ posts, backgroundImage }: { posts: BlogPost[]; backgroundImage: string }) => (
+const WEEK = 60 * 60 * 24 * 7;
+
+const IndexPage = ({
+  posts,
+  backgroundImage,
+}: {
+  posts: BlogPost[];
+  backgroundImage: string;
+}) => (
   <Layout title="Home | Colum Ferry" backgroundImage={backgroundImage}>
     {posts.map((post) => (
       <Post post={post} key={post.title}></Post>
@@ -16,8 +24,10 @@ const IndexPage = ({ posts, backgroundImage }: { posts: BlogPost[]; backgroundIm
 
 export default IndexPage;
 
-export async function getServerSideProps() {
-  const articles = await (await fetch('https://dev.to/api/articles?username=coly010')).json();
+export async function getStaticProps() {
+  const articles = await (
+    await fetch('https://dev.to/api/articles?username=coly010')
+  ).json();
   let posts: BlogPost[] = articles.map((article: any) => ({
     title: article.title,
     coverImage: article.cover_image,
@@ -47,5 +57,6 @@ export async function getServerSideProps() {
 
   return {
     props: { posts, backgroundImage },
+    unstable_revalidate: WEEK,
   };
 }
