@@ -10,9 +10,6 @@ type Props = {
 const Layout: React.FunctionComponent<Props> = ({ children, title = 'Home', backgroundImage }) => {
   const [isMenuVisibile, setMenuVisible] = React.useState(false);
 
-  const menuClasses = `${
-    isMenuVisibile ? 'xs:block' : 'hidden'
-  } lg:block w-full flex-grow lg:flex lg:items-center lg:w-auto `;
 
   return (
     <div>
@@ -52,7 +49,9 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'Home', back
               </svg>
             </button>
           </div>
-          <div className={menuClasses}>
+          <div className={`${
+              isMenuVisibile ? 'xs:block' : 'hidden'
+          } lg:block w-full flex-grow lg:flex lg:items-center lg:w-auto `}>
             <div className="text-sm lg:flex-grow">
               <Link href="">
                 <a className="block underline mt-4 lg:inline-block lg:mt-0 text-green-100 hover:text-white mr-4">
@@ -77,7 +76,7 @@ const Layout: React.FunctionComponent<Props> = ({ children, title = 'Home', back
           </div>
         </nav>
       </header>
-      <main className="xs:w-screen sm:w-auto md:w-3/4 mx-auto xs:p-1 xs:p1-3 sm:p-6">
+      <main className="xs:w-screen sm:w-auto mx-auto xs:p-1 xs:p1-3 sm:p-6 md:flex md:flex-wrap md:justify-around md:items-stretch">
         {children}
       </main>
     </div>
