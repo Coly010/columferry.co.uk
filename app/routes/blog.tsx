@@ -5,6 +5,8 @@ import { HighlightedText } from "~/libs/shared-ui/HighlightedText";
 import { InTextLink } from "~/libs/shared-ui/InTextLink";
 import { intlFormat } from "date-fns";
 
+const posts = import.meta.glob("./*.mdx");
+
 export async function loader({ request }: LoaderFunctionArgs) {
   const blogPostPath =
     "./" +
@@ -13,11 +15,13 @@ export async function loader({ request }: LoaderFunctionArgs) {
       .replace("blog/", "blog.") +
     ".mdx";
 
-  const importedPost = (await import(
-    /* @vite-ignore */ blogPostPath
-  )) as ImportedPost;
+  const importPost = posts[blogPostPath];
+  const importedPost = (await importPost()) as ImportedPost;
   return {
-    ...importedPost,
+    title: importedPost.title,
+    image: importedPost.image,
+    tags: importedPost.tags,
+    canonical: importedPost.canonical,
     publishedDate: intlFormat(importedPost.publishedDate ?? new Date(), {
       month: "long",
       day: "2-digit",
