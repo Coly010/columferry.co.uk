@@ -4,7 +4,8 @@ description: In this blog post, we’ll explore how to combine the strengths of 
 image: /posts/qwikify-nx.avif
 keywords: javascript,webdev,qwik,nx
 ---
-import {Suspense} from "react";
+
+import { Suspense } from "react";
 
 export const title = frontmatter.title;
 export const publishedDate = new Date("August 15, 2023");
@@ -13,42 +14,45 @@ export const canonical = "https://nx.dev/blog/2023-08-15-qwikify-your-dev";
 export const image = frontmatter.image;
 
 export const meta = () => {
-    return [
-        {title: frontmatter.title},
-        {
-            name: "description",
-            content: frontmatter.description,
-        },
-        {
-            name: "keywords",
-            content: frontmatter.keywords
-        },
-        {property: "og:image", content: 'https://columferry.co.uk' + frontmatter.image}
-    ];
+  return [
+    { title: frontmatter.title },
+    {
+      name: "description",
+      content: frontmatter.description,
+    },
+    {
+      name: "keywords",
+      content: frontmatter.keywords,
+    },
+    {
+      property: "og:image",
+      content: "https://columferry.co.uk" + frontmatter.image,
+    },
+  ];
 };
-export const links = () => [{rel: "canonical", href: canonical}];
-
+export const links = () => [{ rel: "canonical", href: canonical }];
 
 In the ever-evolving web development landscape, efficiency and modularity have become paramount. This is where [Nx](https://nx.dev) and [Qwik](https://qwik.builder.io) come into play.
 
 Qwik is a modern web framework that focuses on application performance by reducing the amount of JavaScript that needs to be shipped to the browser. You can learn more about how Qwik achieves this with Resumability [here](https://qwik.builder.io/docs/concepts/resumable/).
 
-Nx is a powerful tool that helps you build extensible and maintainable codebases that scale as your application and team grows. Nx utilises computation cache and workspace analysis to ensure maximum efficiency and developer experience.  You can learn more about Nx [here](https://nx.dev/getting-started/why-nx).
+Nx is a powerful tool that helps you build extensible and maintainable codebases that scale as your application and team grows. Nx utilises computation cache and workspace analysis to ensure maximum efficiency and developer experience. You can learn more about Nx [here](https://nx.dev/getting-started/why-nx).
 
 In this blog post, we’ll explore how to combine the strengths of Nx and Qwik to create a todo app. To do this, we’ll take advantage of an Nx Plugin that was created by the Qwikifiers team to maximise the integration between Qwik and Nx, called [`qwik-nx`](https://github.com/qwikifiers/qwik-nx).
 
-
-> _You do not necessarily need to use an Nx Plugin for Qwik. Instead, you could use the [Qwik CLI](https://qwik.builder.io/docs/getting-started/#create-an-app-using-the-cli) to create your application and add [Nx later](https://nx.dev/recipes/adopting-nx/adding-to-existing-project#installing-nx-on-a-non-monorepo-project)._
-> _This blog post has decided to use the`qwik-nx` plugin to leverage better DX provided by the generators offered by the Plugin._
-
+> _You do not necessarily need to use an Nx Plugin for Qwik. Instead, you could use the [Qwik CLI](https://qwik.builder.io/docs/getting-started/#create-an-app-using-the-cli) to create your application and add [Nx later](https://nx.dev/recipes/adopting-nx/adding-to-existing-project#installing-nx-on-a-non-monorepo-project)._ > _This blog post has decided to use the`qwik-nx` plugin to leverage better DX provided by the generators offered by the Plugin._
 
 You can learn more about this integration in the video below:
 
 <Suspense fallback={"Loading"}>
-    <iframe src="https://www.youtube.com/embed/SY22NaWHv0s?si=eLVdBM5nA9IsTmU2"
-            title="YouTube video player" frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
+  <iframe
+    src="https://www.youtube.com/embed/SY22NaWHv0s?si=eLVdBM5nA9IsTmU2"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerPolicy="strict-origin-when-cross-origin"
+    allowFullScreen
+  ></iframe>
 </Suspense>
 
 ## Creating the Workspace
@@ -61,12 +65,9 @@ npx create-nx-workspace@latest qwik-todo-app
 
 ![Create Nx Workspace](https://cdn-images-1.medium.com/v2/resize:fit:800/0*8PFdw--4V_MBzqRv)
 
+> \_You can also use the`preset` created by the`qwik-nx` plugin by running`npx -y create-qwik-nx` or`npx -y create-nx-workspace@latest --preset=qwik-nx`.This will skip a few of the next steps by installing the appropriate dependencies and generating your Qwik app.
 
-
-> _You can also use the`preset` created by the`qwik-nx` plugin by running`npx -y create-qwik-nx` or`npx -y create-nx-workspace@latest --preset=qwik-nx`.This will skip a few of the next steps by installing the appropriate dependencies and generating your Qwik app.
-
->The`create-qwik-nx` package is an example of creating an Install Package with Nx.You can learn more here: https://nx.dev/extending-nx/recipes/create-install-package_
-
+> The`create-qwik-nx` package is an example of creating an Install Package with Nx.You can learn more here: https://nx.dev/extending-nx/recipes/create-install-package_
 
 Next, navigate into the workspace and install the`qwik-nx` plugin.
 
@@ -74,9 +75,7 @@ Next, navigate into the workspace and install the`qwik-nx` plugin.
 npm install --save-dev qwik-nx
 ```
 
-
 > _You can view a compatibility matrix for which version of`qwik-nx` works with each version of`nx` [here](https://github.com/qwikifiers/qwik-nx#qwik-nx--nx-compatibility-chart)._
-
 
 ## Generate the App
 
@@ -109,10 +108,10 @@ After running this command, you’ll see a new directory and file created in you
 The newly created file should look like this
 
 ```tsx
-import { component$ } from '@builder.io/qwik';
+import { component$ } from "@builder.io/qwik";
 
 export default component$(() => {
-return <div>This is the todo</div>;
+  return <div>This is the todo</div>;
 });
 ```
 
@@ -122,7 +121,6 @@ If you run`nx serve todo` and navigate to`http://localhost:4200/todo` you can se
 
 ![Todo Route in App](https://cdn-images-1.medium.com/v2/resize:fit:800/0*vgW2nRB0nAJliZ3I)
 
-
 ## Build a Basic UI
 
 We want to build a todo application, so let ’s add some UI elements to make this look more like an actual todo application.
@@ -130,23 +128,25 @@ We want to build a todo application, so let ’s add some UI elements to make th
 Update `apps/todo/src/routes/todo/index.tsx` to match the following:
 
 ```tsx
-import {component$} from '@builder.io/qwik';
-import {Form} from "@builder.io/qwik-city";
+import { component$ } from "@builder.io/qwik";
+import { Form } from "@builder.io/qwik-city";
 
 export default component$(() => {
-return <div>
-    <h1>Todos</h1>
+  return (
     <div>
+      <h1>Todos</h1>
+      <div>
         <label>
-            <input type="checkbox"/> {"My First Todo"}
+          <input type="checkbox" /> {"My First Todo"}
         </label>
-    </div>
-    <Form>
-        <input type="hidden" name="id" value={1}/>
-        <input type="text" name="message"/>
+      </div>
+      <Form>
+        <input type="hidden" name="id" value={1} />
+        <input type="text" name="message" />
         <button type="submit">Add</button>
-    </Form>
-</div>;
+      </Form>
+    </div>
+  );
 });
 ```
 
@@ -158,23 +158,17 @@ Awesome!
 
 However, you’ll notice that when you click`Add`, nothing happens!Let’s add some logic to store new todos.
 
-
 ## Generate a Library
 
 Nx helps you organise your workspace in a modular fashion by creating workspace libraries that focus on specific functionality.
 
 Instead of organising your features into subfolders of your application, with Nx, you’ll extract them into workspace libraries(libraries that are not intended to be published, but still used by other libraries and applications in your repository). This helps to create a much stronger boundary between modules and features in your application as libraries have a public API(the`index.ts` file), allowing you to control exactly what can be accessed by consumers.
 
-
 > _You can learn more about defining and ensuring project boundaries [here](https://nx.dev/core-features/enforce-module-boundaries)._
-
-
 
 > Also, by doing this, you start to build out a project graph for your workspace and your application.Defining your architecture in this manner also helps to reduce the areas in your application that each change affects.
 
 > _You can learn more about the Project Graph [here](https://nx.dev/concepts/more-concepts/how-project-graph-is-built)._
-
-
 
 Using this feature of Nx, we can organise the state management of our todo application into its own library, separating the logic from the application itself.
 
@@ -204,14 +198,14 @@ Create`libs/data-access/src/lib/api.ts` and add the following:
 
 ```ts
 export interface Todo {
-id: number;
-message: string;
+  id: number;
+  message: string;
 }
 ```
 
 Next, let’s create a new file`libs/data-access/src/lib/todo.context.tsx` and add the following content:
 
-```tsx
+````tsx
 import {
 component$,
 createContextId,
@@ -326,7 +320,7 @@ export const TodoContext = createContextId<TodoStore>('todo.context');
 </Form>
 </div>;
 });
-```
+````
 
 Our store has no todos in it when the application starts up, so if you serve the application you will no longer see any todos listed.Let’s fix that!
 
@@ -344,39 +338,39 @@ We’ll start by updating our`libs/data-access/src/lib/api.ts` to add our in -me
 
 ```ts
 export interface Todo {
-id: number;
-message: string;
+  id: number;
+  message: string;
 }
 
 interface DB {
-store: Record < string, any[] >;
-get: (storeName: string) => any[];
-set: (storeName: string, value: any[]) => boolean;
-add: (storeName: string, value: any) => boolean;
+  store: Record<string, any[]>;
+  get: (storeName: string) => any[];
+  set: (storeName: string, value: any[]) => boolean;
+  add: (storeName: string, value: any) => boolean;
 }
 export const db: DB = {
-store: {
-    todos: []
-},
-get(storeName) {
+  store: {
+    todos: [],
+  },
+  get(storeName) {
     return db.store[storeName];
-},
-set(storeName, value) {
+  },
+  set(storeName, value) {
     try {
-        db.store[storeName] = value;
-        return true;
+      db.store[storeName] = value;
+      return true;
     } catch (e) {
-        return false;
+      return false;
     }
-},
-add(storeName, value) {
+  },
+  add(storeName, value) {
     try {
-        db.store[storeName].push(value);
-        return true;
+      db.store[storeName].push(value);
+      return true;
     } catch (e) {
-        return false;
+      return false;
     }
-},
+  },
 };
 ```
 
@@ -385,57 +379,59 @@ Now that we have this, let’s use it in our`/todo` route to load some data when
 Update `apps/todo/src/routes/todo/index.tsx` to match the following:
 
 ```tsx
-import {component$} from '@builder.io/qwik';
-import {Form, routeLoader$} from "@builder.io/qwik-city";
-import {TodoContext, db} from "@qwik-todo-app/data-access";
+import { component$ } from "@builder.io/qwik";
+import { Form, routeLoader$ } from "@builder.io/qwik-city";
+import { TodoContext, db } from "@qwik-todo-app/data-access";
 
 export const useGetTodos = routeLoader$(() => {
-// A network request or db connection could be made here to fetch persisted todos
-// For illustrative purposes, we're going to seed a rudimentary in-memory DB if it hasn't been already
-// Then return the value from it
-if (db.get('todos')?.length === 0) {
-    db.set('todos', [
-        {
-            id: 1,
-            message: 'First todo',
-        },
+  // A network request or db connection could be made here to fetch persisted todos
+  // For illustrative purposes, we're going to seed a rudimentary in-memory DB if it hasn't been already
+  // Then return the value from it
+  if (db.get("todos")?.length === 0) {
+    db.set("todos", [
+      {
+        id: 1,
+        message: "First todo",
+      },
     ]);
-}
-const todos: Todo[] = db.get('todos');
-const lastId = [...todos].sort((a, b) => b.id - a.id)[0].id;
-return {todos, lastId};
+  }
+  const todos: Todo[] = db.get("todos");
+  const lastId = [...todos].sort((a, b) => b.id - a.id)[0].id;
+  return { todos, lastId };
 });
 
 export default component$(() => {
-const todoStore = useContext(TodoContext);
-const persistedTodos = useGetTodos();
+  const todoStore = useContext(TodoContext);
+  const persistedTodos = useGetTodos();
 
-useTask$(({track}) => {
+  useTask$(({ track }) => {
     track(() => persistedTodos.value);
     if (persistedTodos.value) {
-        todoStore.todos = persistedTodos.value.todos;
-        todoStore.lastId =
-            todoStore.lastId > persistedTodos.value.lastId
-                ? todoStore.lastId
-                : persistedTodos.value.lastId;
+      todoStore.todos = persistedTodos.value.todos;
+      todoStore.lastId =
+        todoStore.lastId > persistedTodos.value.lastId
+          ? todoStore.lastId
+          : persistedTodos.value.lastId;
     }
-});
+  });
 
-return <div>
-    <h1>Todos</h1>
-    {todoStore.todos.map((t) => (
+  return (
+    <div>
+      <h1>Todos</h1>
+      {todoStore.todos.map((t) => (
         <div key={`todo -${t.id}`}>
-            <label>
-                <input type="checkbox"/> {t.message}
-            </label>
+          <label>
+            <input type="checkbox" /> {t.message}
+          </label>
         </div>
-    ))}
-    <Form>
-        <input type="hidden" name="id" value={1}/>
-        <input type="text" name="message"/>
+      ))}
+      <Form>
+        <input type="hidden" name="id" value={1} />
+        <input type="text" name="message" />
         <button type="submit">Add</button>
-    </Form>
-</div>;
+      </Form>
+    </div>
+  );
 });
 ```
 
@@ -450,71 +446,72 @@ Qwik also allows you to handle form actions on the server using the`routeAction$
 Update `apps/todo/src/routes/todo/index.tsx`
 
 ```tsx
-import {component$} from '@builder.io/qwik';
-import {Form, routeLoader$} from "@builder.io/qwik-city";
-import {TodoContext, db} from "@qwik-todo-app/data-access";
+import { component$ } from "@builder.io/qwik";
+import { Form, routeLoader$ } from "@builder.io/qwik-city";
+import { TodoContext, db } from "@qwik-todo-app/data-access";
 
 export const useGetTodos = routeLoader$(() => {
-// A network request or db connection could be made here to fetch persisted todos
-// For illustrative purposes, we're going to seed a rudimentary in-memory DB if it hasn't been already
-// Then return the value from it
-if (db.get('todos')?.length === 0) {
-    db.set('todos', [
-        {
-            id: 1,
-            message: 'First todo',
-        },
+  // A network request or db connection could be made here to fetch persisted todos
+  // For illustrative purposes, we're going to seed a rudimentary in-memory DB if it hasn't been already
+  // Then return the value from it
+  if (db.get("todos")?.length === 0) {
+    db.set("todos", [
+      {
+        id: 1,
+        message: "First todo",
+      },
     ]);
-}
-const todos: Todo[] = db.get('todos');
-const lastId = [...todos].sort((a, b) => b.id - a.id)[0].id;
-return {todos, lastId};
+  }
+  const todos: Todo[] = db.get("todos");
+  const lastId = [...todos].sort((a, b) => b.id - a.id)[0].id;
+  return { todos, lastId };
 });
 
 export const useAddTodo = routeAction$(
-(todo: {id: string, message: string}) => {
-const success = db.add('todos', {
-    id: parseInt(todo.id),
-    message: todo.message,
-});
-return {success};
-},
-zod$({ id: z.string(), message: z.string() })
+  (todo: { id: string; message: string }) => {
+    const success = db.add("todos", {
+      id: parseInt(todo.id),
+      message: todo.message,
+    });
+    return { success };
+  },
+  zod$({ id: z.string(), message: z.string() }),
 );
 
 export default component$(() => {
-const todoStore = useContext(TodoContext);
-const persistedTodos = useGetTodos();
-const addTodoAction = useAddTodo();
+  const todoStore = useContext(TodoContext);
+  const persistedTodos = useGetTodos();
+  const addTodoAction = useAddTodo();
 
-
-useTask$(({track}) => {
+  useTask$(({ track }) => {
     track(() => persistedTodos.value);
     if (persistedTodos.value) {
-        todoStore.todos = persistedTodos.value.todos;
-        todoStore.lastId =
-            todoStore.lastId > persistedTodos.value.lastId
-                ? todoStore.lastId
-                : persistedTodos.value.lastId;
+      todoStore.todos = persistedTodos.value.todos;
+      todoStore.lastId =
+        todoStore.lastId > persistedTodos.value.lastId
+          ? todoStore.lastId
+          : persistedTodos.value.lastId;
     }
-});
+  });
 
-return <div>
-    <h1>Todos</h1>
-    {todoStore.todos.map((t) => (
+  return (
+    <div>
+      <h1>Todos</h1>
+      {todoStore.todos.map((t) => (
         <div key={`todo -${t.id}`}>
-            <label>
-                <input type="checkbox"/> {t.message}
-            </label>
+          <label>
+            <input type="checkbox" /> {t.message}
+          </label>
         </div>
-    ))}
-    <Form action={addTodoAction}>
-        <input type="hidden" name="id" value={todoStore.lastId + 1}/>
-        <input type="text" name="message"/>
+      ))}
+      <Form action={addTodoAction}>
+        <input type="hidden" name="id" value={todoStore.lastId + 1} />
+        <input type="text" name="message" />
         <button type="submit">Add</button>
-    </Form>
-    {addTodoAction.value?.success && <p>Todo added!</p>}
-</div>;
+      </Form>
+      {addTodoAction.value?.success && <p>Todo added!</p>}
+    </div>
+  );
 });
 ```
 
@@ -527,96 +524,96 @@ However, you might have noticed that our file is starting to get very long.Not o
 To separate the logic, create a new file`libs/data-access/src/lib/todos.ts` and move the logic for loading and adding todos into their own functions:
 
 ```ts
-import { db, Todo } from './api';
+import { db, Todo } from "./api";
 
 export function getTodos() {
-// A network request or db connection could be made here to fetch persisted todos
-// For illustrative purposes, we're going to seed a rudimentary in-memory DB if it hasn't been already
-// Then return the value from it
-if (db.get('todos')?.length === 0) {
-    db.set('todos', [
-        {
-            id: 1,
-            message: 'First todo',
-        },
+  // A network request or db connection could be made here to fetch persisted todos
+  // For illustrative purposes, we're going to seed a rudimentary in-memory DB if it hasn't been already
+  // Then return the value from it
+  if (db.get("todos")?.length === 0) {
+    db.set("todos", [
+      {
+        id: 1,
+        message: "First todo",
+      },
     ]);
-}
-const todos: Todo[] = db.get('todos');
-const lastId = [...todos].sort((a, b) => b.id - a.id)[0].id;
-return {todos, lastId};
+  }
+  const todos: Todo[] = db.get("todos");
+  const lastId = [...todos].sort((a, b) => b.id - a.id)[0].id;
+  return { todos, lastId };
 }
 
 export function addTodo(todo: { id: string; message: string }) {
-const success = db.add('todos', {
-id: parseInt(todo.id),
+  const success = db.add("todos", {
+    id: parseInt(todo.id),
     message: todo.message,
-});
-return {success};
+  });
+  return { success };
 }
 ```
 
 Next, update `libs/data-access/src/index.ts`
 
 ```ts
-export * from './lib/todo.context';
-export * from './lib/api';
-export * from './lib/todo';
+export * from "./lib/todo.context";
+export * from "./lib/api";
+export * from "./lib/todo";
 ```
 
 Finally, let’s update `apps/todo/src/routes/todo/index.tsx` to use our newly created functions:
 
 ```tsx
-import { component$, useContext, useTask$ } from '@builder.io/qwik';
+import { component$, useContext, useTask$ } from "@builder.io/qwik";
 import {
-Form,
-    routeAction$,
-    routeLoader$,
-    z,
-    zod$,
-} from '@builder.io/qwik-city';
-import { addTodo, getTodos, TodoContext } from '@acme/data-access';
+  Form,
+  routeAction$,
+  routeLoader$,
+  z,
+  zod$,
+} from "@builder.io/qwik-city";
+import { addTodo, getTodos, TodoContext } from "@acme/data-access";
 
 export const useGetTodos = routeLoader$(() => getTodos());
 
 export const useAddTodo = routeAction$(
-(todo) => addTodo(todo),
-zod$({ id: z.string(), message: z.string() })
+  (todo) => addTodo(todo),
+  zod$({ id: z.string(), message: z.string() }),
 );
 
 export default component$(() => {
-const todoStore = useContext(TodoContext);
-const persistedTodos = useGetTodos();
-const addTodoAction = useAddTodo();
+  const todoStore = useContext(TodoContext);
+  const persistedTodos = useGetTodos();
+  const addTodoAction = useAddTodo();
 
-useTask$(({track}) => {
+  useTask$(({ track }) => {
     track(() => persistedTodos.value);
     if (persistedTodos.value) {
-        todoStore.todos = persistedTodos.value.todos;
-        todoStore.lastId =
-            todoStore.lastId > persistedTodos.value.lastId
-                ? todoStore.lastId
-                : persistedTodos.value.lastId;
+      todoStore.todos = persistedTodos.value.todos;
+      todoStore.lastId =
+        todoStore.lastId > persistedTodos.value.lastId
+          ? todoStore.lastId
+          : persistedTodos.value.lastId;
     }
-});
+  });
 
-return (
+  return (
     <div>
-        <h1>Todos</h1>
-        {todoStore.todos.map((t) => (
-            <div key={`todo -${t.id}`}>
-                <label>
-                    <input type="checkbox"/> {t.message}
-                </label>
-            </div>
-        ))}
-        <Form action={addTodoAction}>
-            <input type="hidden" name="id" value={todoStore.lastId + 1}/>
-            <input type="text" name="message"/>
-            <button type="submit">Add</button>
-        </Form>
-        {addTodoAction.value?.success && <p>Todo added!</p>}
+      <h1>Todos</h1>
+      {todoStore.todos.map((t) => (
+        <div key={`todo -${t.id}`}>
+          <label>
+            <input type="checkbox" /> {t.message}
+          </label>
+        </div>
+      ))}
+      <Form action={addTodoAction}>
+        <input type="hidden" name="id" value={todoStore.lastId + 1} />
+        <input type="text" name="message" />
+        <button type="submit">Add</button>
+      </Form>
+      {addTodoAction.value?.success && <p>Todo added!</p>}
     </div>
-);
+  );
 });
 ```
 
@@ -648,5 +645,3 @@ This journey through Qwik and Nx demonstrates how thoughtful architecture and th
 - 🚀 [Speed up your CI](https://nx.app/).
 
 Also, if you liked this, click the 👏 and make sure to follow [Colum](https://twitter.com/FerryColum) and [Nx](https://twitter.com/nxdevtools) on X (formerly Twitter) for more!
-
-

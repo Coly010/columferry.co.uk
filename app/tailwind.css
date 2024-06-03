@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 :root {
-    --animate-delay: 0.25s;
+  --animate-delay: 0.25s;
 }
