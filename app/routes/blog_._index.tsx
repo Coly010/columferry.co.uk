@@ -53,13 +53,18 @@ export const loader: LoaderFunction = async (): Promise<BlogListings> => {
       canonical: post.canonical,
     });
   }
-  return mappedPosts;
+  return mappedPosts.sort((a, b) =>
+    a.publishedDate && b.publishedDate
+      ? new Date(b.publishedDate).getTime() -
+        new Date(a.publishedDate).getTime()
+      : 1,
+  );
 };
 
 export default function Blog__index() {
   const data: BlogListings = useLoaderData<typeof loader>();
   return (
-    <div className="mt-4">
+    <div className="mt-4 pb-20">
       <h1 className="text-left text-3xl py-4 mt-4 font-bold animate__animated animate__fadeInUp animate__fast underline decoration-emerald-300 decoration-4">
         Welcome to my blog
       </h1>
@@ -68,7 +73,7 @@ export default function Blog__index() {
         career, from tech articles to things I've learned since I began
         publishing fictional works.
       </h2>
-      <div className="mt-4 grid animate__animated animate__fadeInUp animate__delay-2s">
+      <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-2 animate__animated animate__fadeInUp animate__delay-2s">
         {data.map((post) => (
           <BlogCard key={post.slug} {...post} />
         ))}
@@ -87,10 +92,12 @@ const BlogCard = ({
 }: BlogListing) => {
   return (
     <Link
-      className="block rounded-t-xl max-w-[320px] bg-white shadow border border-zinc-100 hover:shadow-lg hover:border hover:border-emerald-300 hover:scale-110 text-slate-700 transition"
+      className="block rounded-t-xl bg-white shadow border border-zinc-100 hover:shadow-lg hover:border hover:border-emerald-300 hover:scale-110 text-slate-700 transition"
       to={`/blog/${slug}`}
     >
-      {image && <img className="rounded-t-xl" src={image} alt={title} />}
+      {image && (
+        <img className="rounded-t-xl object-cover" src={image} alt={title} />
+      )}
       <div className="py-4 px-2">
         {publishedDate && (
           <h4 className="text-xs font-light pb-2">
