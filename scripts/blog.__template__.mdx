@@ -1,0 +1,33 @@
+---
+title:
+description:
+image: /posts/
+keywords:
+---
+
+import { Suspense } from "react";
+
+export const title = frontmatter.title;
+export const publishedDate = new Date("August 15, 2023");
+export const tags = frontmatter.keywords.split(",");
+export const canonical = "";
+export const image = frontmatter.image;
+
+export const meta = () => {
+    return [
+        { title: frontmatter.title },
+        {
+            name: "description",
+            content: frontmatter.description,
+        },
+        {
+            name: "keywords",
+            content: frontmatter.keywords,
+        },
+        {
+            property: "og:image",
+            content: "https://columferry.co.uk" + frontmatter.image,
+        },
+    ];
+};
+export const links = () => [{ rel: "canonical", href: canonical }];
