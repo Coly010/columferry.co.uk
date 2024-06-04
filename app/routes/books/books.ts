@@ -29,4 +29,20 @@ Lucas Greystone, a mage-in-training, is summoned to go on his Graduation Challen
       "https://www.amazon.co.uk/Blackstone-Legacy-Colum-Ferry/dp/B0BRDCPVXK/",
     image: "books/the-blackstone-legacy.jpg",
   },
+  {
+    title: "Tutarium: The Rise of Demons",
+    publishedDate: new Date(),
+    blurb: `Strange events continue to arise in Osgrua. Sightings of balls of black flame containing what can only be described as a monster clawing to escape. Such events are so ludicrous they've been ignored and the reporters' sanity questioned.
+    
+Never before has Osgrua encountered such happenings. 
+    
+Vivrel Ginlo, an elf holding the position of The Protector of the Realm on the Grand Elven Council stands alone in his belief that these events are linked to his theories that demons exist in this world and that they've been trying to break through into the living realm for centuries.
+    
+With no mention of demons existing in recorded history, he faces constant criticism from his fellow Council members.
+    
+Steadfast in his belief, he chases down the latest series of reports and discovers so much more than he could have bargained for.`,
+    amazonLink: "",
+    image: "",
+    wip: true,
+  },
 ];

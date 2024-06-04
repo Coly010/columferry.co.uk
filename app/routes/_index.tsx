@@ -58,7 +58,7 @@ export default function Index() {
               >
                 The Blackstone Legacy
               </InTextLink>{" "}
-              on Amazon. I'm currently working{" "}
+              on Amazon. I'm currently working on{" "}
               <HighlightedText>The Dark War Trilogy</HighlightedText>, the first
               in a series of books set in{" "}
               <HighlightedText>Tutarium</HighlightedText>, a mystical world
