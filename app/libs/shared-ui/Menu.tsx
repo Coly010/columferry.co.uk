@@ -13,10 +13,11 @@ export const Menu = () => {
         <h2 className="font-bold text-xl">Colum Ferry</h2>
       </div>
       <div className="fixed bottom-0 right-1/2 z-50 h-10 pointer-events-none transform translate-x-1/2 -translate-y-1/2 lg:block lg:relative lg:transform-none lg:right-auto xl:absolute xl:w-full xl:-ml-4 xl:top-4 xl:flex xl:justify-center select-none">
-        <div className="pointer-events-auto rounded-xl w-80 h-10 p-0.5 bg-white border border-zinc-300 shadow-sm flex justify-between items-center gap-x-1">
+        <div className="pointer-events-auto rounded-xl w-96 h-10 p-0.5 bg-white border border-zinc-300 shadow-sm flex justify-between items-center gap-x-1">
           <NavPill to="/">Home</NavPill>
           <NavPill to="/blog">Blog</NavPill>
           <NavPill to="/books">Books</NavPill>
+          <NavPill to="/tutarium">Tutarium</NavPill>
         </div>
       </div>
       <div className="flex justify-between items-center gap-2">

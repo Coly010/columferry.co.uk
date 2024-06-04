@@ -34,7 +34,7 @@ export default function Books() {
   const { publishedBooks, wipBooks } = useLoaderData<typeof loader>();
   return (
     <>
-      <div className="mt-4 pb-20">
+      <div className="mt-4 pb-10">
         <h1 className="text-left text-3xl py-4 mt-4 font-bold animate__animated animate__fadeInUp animate__fast underline decoration-emerald-300 decoration-4">
           My published books
         </h1>

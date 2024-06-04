@@ -3,7 +3,6 @@ import { Link, useLoaderData } from "@remix-run/react";
 import { intlFormat } from "date-fns";
 import { ImportedPost } from "~/routes/blog/types";
 import { HighlightedText } from "~/libs/shared-ui/HighlightedText";
-import { InTextLink } from "~/libs/shared-ui/InTextLink";
 
 type BlogListing = {
   slug: string;
