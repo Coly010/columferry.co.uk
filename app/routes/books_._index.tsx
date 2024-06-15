@@ -141,7 +141,7 @@ const BookCard = ({
               className="flex justify-center items-center gap-2 p-2 mt-4 border border-amber-300 min-w-[48px] h-10 rounded-xl transition transform shadow active:scale-95 bg-amber-500 text-black hover:bg-amber-300 select-none"
             >
               <span>Buy on</span>{" "}
-              <FontAwesomeIcon icon={faAmazon} className="mt-1" />
+              <FontAwesomeIcon icon={faAmazon} className="mt-1" width={24} />
             </a>
           )}
         </div>
