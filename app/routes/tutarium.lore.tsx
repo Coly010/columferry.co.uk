@@ -32,11 +32,13 @@ export default function Component() {
   const post = useLoaderData<typeof loader>();
   return (
     <div className="mt-4">
-      <img
-        src={post.image}
-        alt={post.title}
-        className="rounded-xl animate__animated animate__fadeInUp animate__fast"
-      />
+      {post.image && (
+        <img
+          src={post.image}
+          alt={post.title}
+          className="rounded-xl animate__animated animate__fadeInUp animate__fast"
+        />
+      )}
       <h1 className="pl-0.5 sm:pl-10 text-slate-700 text-3xl font-bold my-4 animate__animated animate__fadeInUp animate__fast animate__delay-1s">
         {post.title}
       </h1>
