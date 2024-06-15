@@ -14,7 +14,7 @@ type BlogListing = {
 };
 type BlogListings = Array<BlogListing>;
 
-const posts = import.meta.glob("./*.mdx");
+const posts = import.meta.glob("./blog.*.mdx");
 const BlogTagColors: Record<string, string> = {
   javascript: "bg-amber-300 text-black",
   typescript: "bg-blue-800 text-white",

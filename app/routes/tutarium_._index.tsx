@@ -1,18 +1,40 @@
 import { HighlightedText } from "~/libs/shared-ui/HighlightedText";
 import { updates } from "./tutarium/updates";
-import { type MappedUpdate } from "./tutarium/types";
+import { Lore, type MappedLore, type MappedUpdate } from "./tutarium/types";
 import { intlFormat } from "date-fns";
-import { useLoaderData } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 
-const BlogTagColors: Record<string, string> = {
+const lore = import.meta.glob("./tutarium.lore.*.mdx");
+
+const TagColors: Record<string, string> = {
   tutarium: "bg-amber-300 text-black",
   "the rise of demons": "bg-blue-800 text-white",
   "word count": "bg-violet-400 text-black",
 };
 
-export const loader = () => {
+export const loader = async () => {
+  const loreListings: MappedLore[] = [];
+
+  const loreImports = Object.entries(lore);
+  for (const [filename, importLore] of loreImports) {
+    const loreListing: Lore = (await importLore()) as Lore;
+    loreListings.push({
+      slug: filename.replace("tutarium.lore.", "").replace(/\.mdx?$/, ""),
+      title: loreListing.title,
+      postedDate: intlFormat(loreListing.postedDate ?? new Date(), {
+        month: "long",
+        day: "2-digit",
+        year: "numeric",
+      }),
+      description: loreListing.description,
+      tags: loreListing.tags,
+      image: loreListing.image,
+    });
+  }
+
   return {
     updates: updates
+      .sort((a, b) => b.postedDate.getTime() - a.postedDate.getTime())
       .map((u) => ({
         ...u,
         postedDate: intlFormat(u.postedDate, {
@@ -21,13 +43,16 @@ export const loader = () => {
           year: "numeric",
         }),
       }))
-      .sort((a, b) => b.postedDate.getTime() - a.postedDate.getTime())
       .slice(0, 5) as MappedUpdate[],
+    loreListings: loreListings.sort(
+      (a, b) =>
+        new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime(),
+    ),
   };
 };
 
 export default function Tutarium() {
-  const { updates } = useLoaderData<typeof loader>();
+  const { updates, loreListings } = useLoaderData<typeof loader>();
   return (
     <div className="mt-4 pb-10">
       <h1 className="text-left text-3xl py-4 mt-4 font-bold animate__animated animate__fadeInUp animate__fast underline decoration-emerald-300 decoration-4">
@@ -60,6 +85,7 @@ export default function Tutarium() {
           <h1 className="text-left text-2xl py-4 mt-4 font-bold underline decoration-emerald-300 decoration-4">
             Lore
           </h1>
+          <RecentLore loreListings={loreListings} />
         </div>
       </div>
     </div>
@@ -74,6 +100,20 @@ const RecentUpdates = ({ updates }: { updates: MappedUpdate[] }) => {
           <UpdateCard
             key={`${update.title}-${update.postedDate}`}
             update={update}
+          />
+        ))}
+    </div>
+  );
+};
+
+const RecentLore = ({ loreListings }: { loreListings: MappedLore[] }) => {
+  return (
+    <div className="grid grid-cols-1 gap-2">
+      {loreListings &&
+        loreListings.map((loreListing) => (
+          <LoreCard
+            key={`${loreListing.title}-${loreListing.postedDate}`}
+            {...loreListing}
           />
         ))}
     </div>
@@ -101,10 +141,42 @@ const UpdateCard = ({ update }: { update: MappedUpdate }) => {
   );
 };
 
+const LoreCard = ({
+  slug,
+  title,
+  description,
+  image,
+  postedDate,
+  tags,
+}: MappedLore) => {
+  return (
+    <Link
+      className="block rounded-t-xl bg-white shadow border border-zinc-100 hover:shadow-lg hover:border hover:border-emerald-300 sm:hover:scale-110 text-slate-700 transition"
+      to={`/tutarium/lore/${slug}`}
+    >
+      {image && (
+        <img className="rounded-t-xl object-cover" src={image} alt={title} />
+      )}
+      <div className="py-4 px-2">
+        {postedDate && (
+          <h4 className="text-xs font-light pb-2">
+            Posted on <HighlightedText>{postedDate}</HighlightedText>
+          </h4>
+        )}
+        <h2 className="font-semibold text-xl">{title}</h2>
+        <h4 className="font-light text-sm">{description}</h4>
+        <div className="flex gap-1 mt-4">
+          {tags && tags.map((tag) => <Tag key={`${title}-${tag}`} tag={tag} />)}
+        </div>
+      </div>
+    </Link>
+  );
+};
+
 const Tag = ({ tag }: { tag: string }) => {
   return (
     <span
-      className={`${BlogTagColors[tag.toLowerCase()] ?? "bg-emerald-300"} rounded-xl px-2 py-[1px] text-xs`}
+      className={`${TagColors[tag.toLowerCase()] ?? "bg-emerald-300"} rounded-xl px-2 py-[1px] text-xs`}
     >
       {tag}
     </span>
