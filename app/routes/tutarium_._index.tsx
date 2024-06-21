@@ -155,7 +155,7 @@ const LoreCard = ({
       to={`/tutarium/lore/${slug}`}
     >
       {image && (
-        <img className="rounded-t-xl object-cover" src={image} alt={title} />
+        <img className="rounded-t-xl object-fill" src={image} alt={title} />
       )}
       <div className="py-4 px-2">
         {postedDate && (

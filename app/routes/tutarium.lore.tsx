@@ -36,7 +36,7 @@ export default function Component() {
         <img
           src={post.image}
           alt={post.title}
-          className="rounded-xl animate__animated animate__fadeInUp animate__fast"
+          className="rounded-xl animate__animated animate__fadeInUp animate__fast max-h-[420px] mx-auto"
         />
       )}
       <h1 className="pl-0.5 sm:pl-10 text-slate-700 text-3xl font-bold my-4 animate__animated animate__fadeInUp animate__fast animate__delay-1s">
