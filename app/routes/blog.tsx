@@ -4,6 +4,7 @@ import { ImportedPost } from "~/routes/blog/types";
 import { HighlightedText } from "~/libs/shared-ui/HighlightedText";
 import { InTextLink } from "~/libs/shared-ui/InTextLink";
 import { intlFormat } from "date-fns";
+import { Breadcrumbs } from "~/components/breadcrumbs";
 
 const posts = import.meta.glob("./*.mdx");
 
@@ -34,6 +35,7 @@ export default function Component() {
   const post = useLoaderData<typeof loader>();
   return (
     <div className="mt-4">
+      <Breadcrumbs />
       <img
         src={post.image}
         alt={post.title}
