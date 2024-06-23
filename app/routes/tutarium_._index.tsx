@@ -151,7 +151,7 @@ const LoreCard = ({
 }: MappedLore) => {
   return (
     <Link
-      className="block rounded-t-xl bg-white shadow border border-zinc-100 hover:shadow-lg hover:border hover:border-emerald-300 sm:hover:scale-110 text-slate-700 transition"
+      className="block rounded-xl bg-white shadow border border-zinc-100 hover:shadow-lg hover:border hover:border-emerald-300 sm:hover:scale-110 text-slate-700 transition"
       to={`/tutarium/lore/${slug}`}
     >
       {image && (
