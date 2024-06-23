@@ -21,7 +21,8 @@ export function FirebaseAnalytics() {
   const [loggedPathname, setLoggedPathname] = useState<string>("b");
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && !import.meta.env.DEV) {
+      console.log("analytics");
       if (document.readyState === "complete") {
         if (isInitialRequest) {
           isInitialRequest = false;

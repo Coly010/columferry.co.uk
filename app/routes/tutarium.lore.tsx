@@ -3,6 +3,7 @@ import { LoaderFunctionArgs } from "@remix-run/node";
 import { HighlightedText } from "~/libs/shared-ui/HighlightedText";
 import { intlFormat } from "date-fns";
 import { type Lore, type MappedLore } from "~/routes/tutarium/types";
+import { Breadcrumbs } from "~/components/breadcrumbs";
 
 const lore = import.meta.glob("./tutarium.lore.*.mdx");
 
@@ -32,6 +33,7 @@ export default function Component() {
   const post = useLoaderData<typeof loader>();
   return (
     <div className="mt-4">
+      <Breadcrumbs />
       {post.image && (
         <img
           src={post.image}
