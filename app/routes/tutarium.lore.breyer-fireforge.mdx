@@ -3,6 +3,7 @@ title: Breyer Fireforge
 description: Historian for the Mage Sanctuary.
 image: /books/tutarium/lore/breyer-fireforge.png
 keywords: Tutarium
+loreType: character
 ---
 
 export const title = frontmatter.title;
@@ -10,6 +11,7 @@ export const postedDate = new Date("June 21, 2024");
 export const tags = frontmatter.keywords.split(",");
 export const description = frontmatter.description;
 export const image = frontmatter.image;
+export const loreType = frontmatter.loreType;
 
 export const meta = () => {
     return [

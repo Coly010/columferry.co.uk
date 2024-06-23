@@ -2,12 +2,14 @@
 title: Camp Alpine
 description: A small settlement made up of multiple groups of families who joined together many years go for survival. They used to travel, trading goods in towns to gather gold for purchases of things that they cannot make or hunt for.
 keywords: Tutarium
+loreType: location
 ---
 
 export const title = frontmatter.title;
 export const postedDate = new Date("June 15, 2024");
 export const tags = frontmatter.keywords.split(",");
 export const description = frontmatter.description;
+export const loreType = frontmatter.loreType;
 
 export const meta = () => {
     return [

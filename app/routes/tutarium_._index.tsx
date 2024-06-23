@@ -100,9 +100,17 @@ export default function Tutarium() {
           <RecentUpdates updates={updates} />
         </div>
         <div className="animate__animated animate__fadeInUp animate__delay-2s">
-          <h1 className="text-left text-2xl py-4 mt-4 font-bold underline decoration-emerald-300 decoration-4">
-            Lore
-          </h1>
+          <div className="flex justify-between items-baseline">
+            <h1 className="text-left text-2xl py-4 mt-4 font-bold underline decoration-emerald-300 decoration-4">
+              <Link to={"/tutarium/lore"}>Lore</Link>
+            </h1>
+            <Link
+              to={`/tutarium/lore`}
+              className="underline font-medium decoration-emerald-500 text-emerald-500 underline-offset-4 transition hover:text-emerald-300 hover:decoration-emerald-300"
+            >
+              View all
+            </Link>
+          </div>
           <RecentLore loreListings={loreListings} />
         </div>
       </div>

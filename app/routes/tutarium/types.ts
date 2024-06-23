@@ -18,6 +18,7 @@ export interface Lore {
   postedDate: Date;
   tags?: [];
   image?: string;
+  loreType?: LoreType;
 }
 
 export interface MappedLore {
@@ -26,5 +27,13 @@ export interface MappedLore {
   postedDate: string;
   tags?: [];
   image?: string;
+  loreType?: LoreType;
   slug: string;
 }
+
+export type LoreType = "location" | "character" | "natural-wonder";
+export const LoreTypeToText: Record<LoreType, string> = {
+  location: "Locations",
+  character: "Characters",
+  "natural-wonder": "Natural Wonders",
+};

@@ -3,6 +3,7 @@ title: Tree of Being
 description: An enormous Blackwood Tree, with striking blue leaves.
 image: /books/tutarium/lore/tree-of-being.png
 keywords: Tutarium
+loreType: natural-wonder
 ---
 
 export const title = frontmatter.title;
@@ -10,6 +11,7 @@ export const postedDate = new Date("June 15, 2024");
 export const tags = frontmatter.keywords.split(",");
 export const description = frontmatter.description;
 export const image = frontmatter.image;
+export const loreType = frontmatter.loreType;
 
 export const meta = () => {
     return [

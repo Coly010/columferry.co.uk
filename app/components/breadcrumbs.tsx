@@ -1,4 +1,4 @@
-import { useLocation } from "@remix-run/react";
+import { Link, useLocation } from "@remix-run/react";
 import { useEffect, useState } from "react";
 
 type PathSegment = {
@@ -36,12 +36,12 @@ export function Breadcrumbs() {
             {location.pathname === segment.href ? (
               <span>{segment.text}</span>
             ) : (
-              <a
-                href={segment.href}
+              <Link
+                to={segment.href}
                 className="underline decoration-emerald-500 text-emerald-500 underline-offset-4 transition hover:text-emerald-300 hover:decoration-emerald-300"
               >
                 {segment.text}
-              </a>
+              </Link>
             )}{" "}
             {index === pathSegments.length - 1 ? (
               ""
