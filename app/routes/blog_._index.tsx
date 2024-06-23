@@ -31,6 +31,12 @@ export const meta: MetaFunction = () => {
       content:
         "Take a look through my blog posts on everything from Tech to Writing. Find articles about Angular, Nx, Module Federation and more here.",
     },
+    { property: "og:title", content: "Blog | Colum Ferry" },
+    {
+      property: "og:description",
+      content:
+        "Take a look through my blog posts on everything from Tech to Writing. Find articles about Angular, Nx, Module Federation and more here.",
+    },
   ];
 };
 

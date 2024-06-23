@@ -11,6 +11,33 @@ export const tags = frontmatter.keywords.split(",");
 export const description = frontmatter.description;
 export const image = frontmatter.image;
 
+export const meta = () => {
+    return [
+        { title: `${frontmatter.title} | Lore |  Tutarium | Colum Ferry` },
+        { property: "og:title", content: `${frontmatter.title} | Lore |  Tutarium | Colum Ferry` },
+        {
+            name: "description",
+            content: frontmatter.description,
+        },
+        {
+            property: "og:description",
+            content: frontmatter.description,
+        },
+        {
+            name: "keywords",
+            content: frontmatter.keywords,
+        },
+        {
+            property: "og:image",
+            content: "https://columferry.co.uk" + frontmatter.image,
+        },
+        {
+            property: "og:type",
+            content: "article"
+        },
+    ];
+};
+
 
 ### What is it?
 	- An enormous **Blackwood Tree**, with striking blue leaves.

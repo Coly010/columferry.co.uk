@@ -9,6 +9,33 @@ export const postedDate = new Date("June 15, 2024");
 export const tags = frontmatter.keywords.split(",");
 export const description = frontmatter.description;
 
+export const meta = () => {
+    return [
+        { title: `${frontmatter.title} | Lore |  Tutarium | Colum Ferry` },
+        { property: "og:title", content: `${frontmatter.title} | Lore |  Tutarium | Colum Ferry` },
+        {
+            name: "description",
+            content: frontmatter.description,
+        },
+        {
+            property: "og:description",
+            content: frontmatter.description,
+        },
+        {
+            name: "keywords",
+            content: frontmatter.keywords,
+        },
+        {
+            property: "og:image",
+            content: "https://columferry.co.uk" + frontmatter.image,
+        },
+        {
+            property: "og:type",
+            content: "article"
+        },
+    ];
+};
+
 ### What is it?
 	- A small settlement made up of multiple groups of families who joined together many years go for survival.
 	- They used to travel, trading goods in towns to gather gold for purchases of things that they cannot make or hunt for.

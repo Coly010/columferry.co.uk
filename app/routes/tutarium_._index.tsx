@@ -3,8 +3,26 @@ import { updates } from "./tutarium/updates";
 import { Lore, type MappedLore, type MappedUpdate } from "./tutarium/types";
 import { intlFormat } from "date-fns";
 import { Link, useLoaderData } from "@remix-run/react";
+import { MetaFunction } from "@remix-run/node";
 
 const lore = import.meta.glob("./tutarium.lore.*.mdx");
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Tutarium | Colum Ferry" },
+    {
+      name: "description",
+      content:
+        "A fantasy world where my next series of books are set. A world unlike our own. Home to Humans, Elves, Dwarves and more. A mystical aura, The Essence, permeates the land",
+    },
+    { property: "og:title", content: "Tutarium | Colum Ferry" },
+    {
+      property: "og:description",
+      content:
+        "A fantasy world where my next series of books are set. A world unlike our own. Home to Humans, Elves, Dwarves and more. A mystical aura, The Essence, permeates the land",
+    },
+  ];
+};
 
 const TagColors: Record<string, string> = {
   tutarium: "bg-amber-300 text-black",

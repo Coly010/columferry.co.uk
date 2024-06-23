@@ -6,13 +6,14 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import { Menu } from "~/libs/shared-ui/Menu";
-import { type LinksFunction, MetaFunction } from "@remix-run/node";
+import { type LinksFunction } from "@remix-run/node";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import "animate.css";
 import "./tailwind.css";
+import { FirebaseAnalytics } from "~/components/use-firebase";
 
 export const links: LinksFunction = () => [
   {
@@ -39,6 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body className="min-h-screen bg-gradient-to-b from-emerald-50 to-white bg-no-repeat bg-cover">
+        <FirebaseAnalytics />
         <main className="container mx-auto px-1 sm:px-4">
           <Menu />
           {children}

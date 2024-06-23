@@ -5,6 +5,24 @@ import { HighlightedText } from "~/libs/shared-ui/HighlightedText";
 import { faAmazon } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { InTextLink } from "~/libs/shared-ui/InTextLink";
+import { MetaFunction } from "@remix-run/node";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Books | Colum Ferry" },
+    {
+      name: "description",
+      content:
+        "Find all my written work and works in progress here. Look out for The Blackstone Legacy and Tutarium!",
+    },
+    { property: "og:title", content: "Books | Colum Ferry" },
+    {
+      property: "og:description",
+      content:
+        "Find all my written work and works in progress here. Look out for The Blackstone Legacy and Tutarium!",
+    },
+  ];
+};
 
 export const loader = async () => {
   const sortedBooks = books
@@ -76,8 +94,10 @@ export default function Books() {
           However, I want a more centralised location where you can view updates
           about the progress of this book as well as some short pieces of lore
           and stories set in Tutarium. For that, you can head to the{" "}
-          <InTextLink baseTextSize="text-md">Tutarium</InTextLink> section of
-          this site!
+          <InTextLink baseTextSize="text-md" href="/tutarium">
+            Tutarium
+          </InTextLink>{" "}
+          section of this site!
         </p>
         <div className="mt-4 grid grid-cols-1 gap-2 animate__animated animate__fadeInUp animate__delay-2s">
           {wipBooks.map((book) => (
