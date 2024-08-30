@@ -21,4 +21,12 @@ This means that the book will take longer to finish, however, it will be a much 
 Most recent word count update at this point is: <span class="font-semibold">43,946 words</span>!`,
     tags: ["Word Count", "Tutarium", "The Rise of Demons"],
   },
+  {
+    title: "Vivrel's storyline completed!",
+    postedDate: new Date("August 30, 2024"),
+    content: `Vivrel's storyline has been completed! His final chapter also reflects the final chapter in the book, so it was nice to see the ending completed.
+That just leaves Calilas' storyline and Marvello's. I need to properly plan these out and find where each of the chapters that will make up their stories should fit. 
+Most recent word count update at this point is: <span class="font-semibold">62,202 words</span>!`,
+    tags: ["Word Count", "Tutarium", "The Rise of Demons"],
+  },
 ];
