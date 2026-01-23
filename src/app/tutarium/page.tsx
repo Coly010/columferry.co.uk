@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { getAllLoreArticles } from "@/lib/content";
+import { getAllLoreArticles, getAllUpdates } from "@/lib/content";
 import { intlFormat } from "date-fns";
 import { HighlightedText } from "@/components/highlighted-text";
+import { MarkdownContent } from "@/components/markdown-content";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -15,70 +16,27 @@ export const metadata: Metadata = {
   },
 };
 
-interface Update {
-  title: string;
-  content: string;
-  postedDate: string;
-  tags: string[];
-}
-
 const TagColors: Record<string, string> = {
   tutarium: "bg-amber-300 text-black",
   "the rise of demons": "bg-blue-800 text-white",
   "word count": "bg-violet-400 text-black",
 };
 
-const updates: Update[] = [
-  {
-    title: "Word Count Update",
-    postedDate: intlFormat(new Date("June 4, 2024"), {
-      month: "long",
-      day: "2-digit",
-      year: "numeric",
-    }),
-    content: `I'm about halfway through what is currently Chapter Fourteen and the word count update at this point is: <span class="font-semibold">38,395 words</span>!`,
-    tags: ["Word Count", "Tutarium", "The Rise of Demons"],
-  },
-  {
-    title: "Word Count Update",
-    postedDate: intlFormat(new Date("June 15, 2024"), {
-      month: "long",
-      day: "2-digit",
-      year: "numeric",
-    }),
-    content: `Most recent word count update at this point is: <span class="font-semibold">41,090 words</span>!`,
-    tags: ["Word Count", "Tutarium", "The Rise of Demons"],
-  },
-  {
-    title: "So, I've made a decision...",
-    postedDate: intlFormat(new Date("June 23, 2024"), {
-      month: "long",
-      day: "2-digit",
-      year: "numeric",
-    }),
-    content: `It's nothing too major. I've decided that The Rise of Demons should go from one character's perspective, to three.
-This means that the book will take longer to finish, however, it will be a much better book for it!
-Most recent word count update at this point is: <span class="font-semibold">43,946 words</span>!`,
-    tags: ["Word Count", "Tutarium", "The Rise of Demons"],
-  },
-  {
-    title: "Vivrel's storyline completed!",
-    postedDate: intlFormat(new Date("August 30, 2024"), {
-      month: "long",
-      day: "2-digit",
-      year: "numeric",
-    }),
-    content: `Vivrel's storyline has been completed! His final chapter also reflects the final chapter in the book, so it was nice to see the ending completed.
-That just leaves Calilas' storyline and Marvello's. I need to properly plan these out and find where each of the chapters that will make up their stories should fit.
-Most recent word count update at this point is: <span class="font-semibold">62,202 words</span>!`,
-    tags: ["Word Count", "Tutarium", "The Rise of Demons"],
-  },
-].sort(
-  (a, b) =>
-    new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime(),
-);
-
 export default function Tutarium() {
+  const updates = getAllUpdates()
+    .sort(
+      (a, b) =>
+        new Date(b.postedDate).getTime() - new Date(a.postedDate).getTime(),
+    )
+    .map((update) => ({
+      ...update,
+      formattedDate: intlFormat(new Date(update.postedDate), {
+        month: "long",
+        day: "2-digit",
+        year: "numeric",
+      }),
+    }));
+
   const loreArticles = getAllLoreArticles().map((article) => ({
     ...article,
     postedDate: article.postedDate
@@ -118,7 +76,7 @@ export default function Tutarium() {
           </h1>
           <div className="grid grid-cols-1 gap-2">
             {updates.slice(0, 5).map((update, i) => (
-              <UpdateCard key={`${update.title}-${i}`} update={update} />
+              <UpdateCard key={`${update.slug}-${i}`} update={update} />
             ))}
           </div>
         </div>
@@ -145,20 +103,29 @@ export default function Tutarium() {
   );
 }
 
-function UpdateCard({ update }: { update: Update }) {
+function UpdateCard({
+  update,
+}: {
+  update: {
+    slug: string;
+    title: string;
+    formattedDate: string;
+    content: string;
+    tags: string[];
+  };
+}) {
   return (
     <div className="my-2 p-2 rounded-xl bg-white shadow border border-zinc-100">
       <h4 className="text-xs font-light italic my-2">
-        Posted on {update.postedDate}
+        Posted on {update.formattedDate}
       </h4>
       <h3 className="text-lg font-semibold my-2">{update.title}</h3>
-      <p
-        className="text-sm font-light whitespace-pre-wrap"
-        dangerouslySetInnerHTML={{ __html: update.content }}
-      ></p>
+      <div className="text-sm font-light whitespace-pre-wrap prose prose-sm">
+        <MarkdownContent content={update.content} />
+      </div>
       <div className="flex gap-1 mt-4">
         {update.tags.map((tag) => (
-          <Tag key={`${update.title}-${tag}`} tag={tag} />
+          <Tag key={`${update.slug}-${tag}`} tag={tag} />
         ))}
       </div>
     </div>

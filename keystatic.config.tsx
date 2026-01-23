@@ -19,6 +19,52 @@ const storage = isGithubMode
 export default config({
   storage,
   collections: {
+    books: collection({
+      label: "Books",
+      slugField: "title",
+      path: "content/books/*",
+      format: { contentField: "content" },
+      schema: {
+        title: fields.slug({ name: { label: "Title" } }),
+        publishedDate: fields.date({
+          label: "Published Date",
+        }),
+        amazonLink: fields.url({
+          label: "Amazon Link",
+        }),
+        image: fields.text({
+          label: "Cover Image Path",
+          description: "Path relative to public/ (e.g. /books/my-book.jpg)",
+        }),
+        wip: fields.checkbox({
+          label: "Work in Progress",
+          defaultValue: false,
+        }),
+        content: fields.mdx({
+          label: "Blurb",
+        }),
+      },
+    }),
+    updates: collection({
+      label: "Updates",
+      slugField: "title",
+      path: "content/updates/*",
+      format: { contentField: "content" },
+      schema: {
+        title: fields.slug({ name: { label: "Title" } }),
+        postedDate: fields.date({
+          label: "Posted Date",
+          validation: { isRequired: true },
+        }),
+        tags: fields.array(fields.text({ label: "Tag" }), {
+          label: "Tags",
+          itemLabel: (props) => props.value,
+        }),
+        content: fields.mdx({
+          label: "Content",
+        }),
+      },
+    }),
     blog: collection({
       label: "Blog Posts",
       slugField: "title",
