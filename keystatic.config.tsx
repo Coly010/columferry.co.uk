@@ -1,9 +1,7 @@
 import { config, fields, collection } from "@keystatic/core";
 
-const isGithubMode = !!(
-  process.env.KEYSTATIC_GITHUB_CLIENT_ID &&
-  process.env.KEYSTATIC_SECRET
-);
+const isGithubMode =
+  process.env.NEXT_PUBLIC_KEYSTATIC_STORAGE_KIND === "github";
 
 const storage = isGithubMode
   ? {
