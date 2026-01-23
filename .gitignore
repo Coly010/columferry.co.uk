@@ -1,7 +1,22 @@
 node_modules
 
-/.cache
-/build
+# Next.js
+/.next/
+/out/
+
 .env
+.env.*
+!.env.example
 
 .idea
+.vscode
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings (shared config is committed)
+.claude/settings.local.json
+.claude/scratch/
+.claude/*.log
+.claude/*.tmp

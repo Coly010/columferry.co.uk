@@ -1,0 +1,12 @@
+# Local Claude settings (user-specific)
+settings.local.json
+
+# Agent output/scratch files
+*.tmp
+*.log
+scratch/
+
+# Don't ignore the shared settings and commands
+!settings.json
+!commands/
+!hooks/

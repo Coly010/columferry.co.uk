@@ -1,9 +1,11 @@
 import type { Config } from "tailwindcss";
 
-export default {
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+const config: Config = {
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {},
   },
   plugins: [require("@tailwindcss/typography")],
-} satisfies Config;
+};
+
+export default config;
