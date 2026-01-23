@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     "Colum Ferry. Senior Software Engineer at Nx. Building monorepo tooling and build systems to help your projects scale without sacrificing Developer Experience.",
 };
 
-export default function RootLayout({
+export default function SiteLayout({
   children,
 }: {
   children: React.ReactNode;
