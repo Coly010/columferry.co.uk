@@ -7,7 +7,7 @@ import { MarkdownContent } from "@/components/markdown-content";
 import { Metadata } from "next";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
@@ -15,8 +15,9 @@ export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const article = getLoreArticle(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const article = getLoreArticle(slug);
   if (!article) return {};
   return {
     title: `${article.title} | Lore | Tutarium | Colum Ferry`,
@@ -29,8 +30,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function LoreDetail({ params }: Props) {
-  const article = getLoreArticle(params.slug);
+export default async function LoreDetail({ params }: Props) {
+  const { slug } = await params;
+  const article = getLoreArticle(slug);
   if (!article) notFound();
 
   const postedDate = article.postedDate

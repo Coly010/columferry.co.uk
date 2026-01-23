@@ -20,3 +20,4 @@ Thumbs.db
 .claude/scratch/
 .claude/*.log
 .claude/*.tmp
+*.tsbuildinfo

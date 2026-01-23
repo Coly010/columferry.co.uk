@@ -8,7 +8,7 @@ import { MarkdownContent } from "@/components/markdown-content";
 import { Metadata } from "next";
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
 export function generateStaticParams() {
@@ -16,8 +16,9 @@ export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const post = getBlogPost(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
   if (!post) return {};
   return {
     title: `${post.title} | Colum Ferry`,
@@ -30,8 +31,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function BlogPost({ params }: Props) {
-  const post = getBlogPost(params.slug);
+export default async function BlogPost({ params }: Props) {
+  const { slug } = await params;
+  const post = getBlogPost(slug);
   if (!post) notFound();
 
   const publishedDate = post.publishedDate
