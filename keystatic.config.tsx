@@ -20,7 +20,7 @@ export default config({
     books: collection({
       label: "Books",
       slugField: "title",
-      path: "content/books/*",
+      path: "content/books/*/",
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
@@ -46,7 +46,7 @@ export default config({
     updates: collection({
       label: "Updates",
       slugField: "title",
-      path: "content/updates/*",
+      path: "content/updates/*/",
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
@@ -66,7 +66,7 @@ export default config({
     blog: collection({
       label: "Blog Posts",
       slugField: "title",
-      path: "content/blog/*",
+      path: "content/blog/*/",
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
@@ -98,7 +98,7 @@ export default config({
     lore: collection({
       label: "Lore Articles",
       slugField: "title",
-      path: "content/lore/*",
+      path: "content/lore/*/",
       format: { contentField: "content" },
       schema: {
         title: fields.slug({ name: { label: "Title" } }),
