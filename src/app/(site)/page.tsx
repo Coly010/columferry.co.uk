@@ -4,6 +4,7 @@ import { intlFormat } from "date-fns";
 import { InTextLink } from "@/components/in-text-link";
 import { HighlightedText } from "@/components/highlighted-text";
 import { MarkdownContent } from "@/components/markdown-content";
+import { NewsletterSubscribe } from "@/components/newsletter-subscribe";
 import { getAllBooks, getAllUpdates } from "@/lib/content";
 
 const TagColors: Record<string, string> = {
@@ -158,6 +159,9 @@ export default function Home() {
                 </Link>
               </div>
             )}
+          </div>
+          <div className="mt-6">
+            <NewsletterSubscribe compact />
           </div>
         </div>
       )}

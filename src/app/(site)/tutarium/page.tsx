@@ -3,6 +3,7 @@ import { getAllLoreArticles, getAllUpdates } from "@/lib/content";
 import { intlFormat } from "date-fns";
 import { HighlightedText } from "@/components/highlighted-text";
 import { MarkdownContent } from "@/components/markdown-content";
+import { NewsletterSubscribe } from "@/components/newsletter-subscribe";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -69,6 +70,9 @@ export default function Tutarium() {
         On this page, you&apos;ll find a collection of updates, lore and short
         stories pertaining to <HighlightedText>Tutarium</HighlightedText>.
       </p>
+      <div className="mt-6">
+        <NewsletterSubscribe />
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         <div>
           <h1 className="text-left text-2xl py-4 mt-4 font-bold underline decoration-emerald-300 decoration-4">

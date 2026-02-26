@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Menu } from "@/components/menu";
+import { Footer } from "@/components/footer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -26,6 +27,7 @@ export default function SiteLayout({
           <Menu />
           <div className="container md:max-w-screen-md flex flex-col mx-auto px-4">
             {children}
+            <Footer />
           </div>
         </main>
       </body>

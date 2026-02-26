@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getAllLoreArticles } from "@/lib/content";
 import { Breadcrumbs } from "@/components/breadcrumbs";
+import { NewsletterSubscribe } from "@/components/newsletter-subscribe";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -66,6 +67,9 @@ export default function LorePage() {
             </div>
           ),
         )}
+      </div>
+      <div className="mt-8">
+        <NewsletterSubscribe compact />
       </div>
     </div>
   );
